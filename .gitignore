@@ -10,6 +10,11 @@
 
 # production
 /build
+/buildMain
+/dist
+/dotnet/bin
+/dotnet/obj
+/dotnet-*
 
 # misc
 .DS_Store
@@ -21,3 +26,5 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+*.suo
