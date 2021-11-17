@@ -18,8 +18,10 @@ export function validateLogin(
     // let localApi = store.getState()?.localApiDetails;
     const queryString = `https://localhost:${localApi.port}/Packline/Login?user=${user}&password=${password}`;
     const headers = {
-        headers: {
-            'x-signing-key': localApi.signingKey,
+        data: {
+            headers: {
+                'x-signing-key': localApi.signingKey,
+            },
         },
     };
 
