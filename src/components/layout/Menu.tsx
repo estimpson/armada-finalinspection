@@ -37,18 +37,15 @@ export function MainMenu(prop: { closeAction?: () => void }) {
                             height="30"
                             className="d-inline-block align-top"
                         />{' '}
-                        Fx Pack Line
+                        Fx Final Inspection
                     </Navbar.Brand>
                     {identity.userName && (
                         <>
                             <Navbar.Toggle aria-controls="basic-navbar-nav" />
                             <Navbar.Collapse id="basic-navbar-nav">
                                 <Nav className="me-auto">
-                                    <Nav.Link as={Link} to="/jobs-demo">
-                                        Jobs Demo
-                                    </Nav.Link>
-                                    <Nav.Link as={Link} to="/printers">
-                                        Printers
+                                    <Nav.Link as={Link} to="/dummy">
+                                        Dummy
                                     </Nav.Link>
                                 </Nav>
                             </Navbar.Collapse>

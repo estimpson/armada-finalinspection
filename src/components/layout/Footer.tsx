@@ -12,7 +12,7 @@ export function Footer() {
                 </p>
                 <p className="m-0">
                     <a href="/" className="text-decoration-none text-reset">
-                        Fx Pack Line
+                        Fx Final Inspection
                     </a>
                 </p>
             </Container>

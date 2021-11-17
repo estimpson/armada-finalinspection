@@ -29,7 +29,7 @@ export default function Home() {
             <Container className="col-md-8 col-lg-6">
                 <Row>
                     <Col sm="8">
-                        <p className="fs-1">Fx Pack Line</p>
+                        <p className="fs-1">Fx Final Inspection</p>
                     </Col>
                 </Row>
                 {identity?.userName ? (
