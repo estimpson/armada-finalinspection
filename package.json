@@ -1,9 +1,9 @@
 {
-    "name": "armada-finalinspection",
+    "name": "fx-finalinspection",
     "version": "0.1.0",
     "private": true,
     "author": "Eric Stimpson",
-    "description": "Armada - Final Instpection",
+    "description": "Armada - Final Inspection",
     "main": "./buildMain/electron.js",
     "homepage": "./",
     "dependencies": {
@@ -17,6 +17,7 @@
         "bootstrap": "^5.1.3",
         "cross-spawn": "^7.0.3",
         "date-fns": "^2.25.0",
+        "electron-devtools-installer": "^3.2.0",
         "get-port": "^5.1.1",
         "react": "^17.0.2",
         "react-bootstrap": "^2.0.2",
@@ -70,14 +71,14 @@
         "cross-env": "^7.0.3",
         "electron": "^16.0.0",
         "electron-builder": "^22.13.1",
-        "electron-devtools-installer": "^3.2.0",
         "electronmon": "^2.0.2",
         "shx": "^0.3.3",
         "wait-on": "^6.0.0"
     },
     "build": {
-        "appId": "com.electon.myapp",
-        "productName": "My Electron App",
+        "appId": "com.fx.armada.final-inspection",
+        "includePdb": "true",
+        "productName": "Fx Final Inspection",
         "files": [
             "build/**/*",
             "node_modules/**/*"
@@ -91,6 +92,7 @@
         },
         "win": {
             "asarUnpack": "dotnet-win",
+            "icon": "./build/favicon.png",
             "files": [
                 "node_modules/**",
                 "buildMain/**",
