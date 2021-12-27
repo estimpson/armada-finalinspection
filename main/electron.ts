@@ -11,7 +11,6 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
-        icon: path.join(__dirname, '../public/favicon.ico'),
         // Set the path of an additional "preload" script that can be used to
         // communicate between node-land and browser-land.
         webPreferences: {
@@ -97,4 +96,11 @@ ipcMain.on('to-main', (event, args) => {
 
     // Send results back to renderer process
     mainWindow.webContents.send('from-main', { msg: 'Hello from Main' });
+});
+
+// An example of ipc through contextBridge
+ipcMain.on('app-close', (event, args) => {
+    console.log("ipcMain.on('app-close')");
+
+    mainWindow.close();
 });
