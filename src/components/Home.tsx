@@ -14,6 +14,11 @@ import {
     loginAsync,
     selectIdentity,
 } from '../features/identity/identitySlice';
+import {
+    IInspectionJob,
+    selectInspectionJob,
+} from '../features/inspectionJob/inspectionJobSlice';
+import { InspectionJob } from './inspection-job/InspectionJob';
 
 export default function Home() {
     const dispatch = useAppDispatch();
@@ -21,16 +26,16 @@ export default function Home() {
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
 
-    // dependent data sets
+    // dependent data
+    const inspectionJob: IInspectionJob = useAppSelector(selectInspectionJob);
+
     const identity: IIdentity = useAppSelector(selectIdentity);
 
     return (
         <>
             <Container className="col-md-8 col-lg-6">
                 <Row>
-                    <Col sm="8">
-                        <p className="fs-1">Fx Final Inspection</p>
-                    </Col>
+                    <InspectionJob inspectionJob={inspectionJob} />
                 </Row>
                 {identity?.userName ? (
                     <></>

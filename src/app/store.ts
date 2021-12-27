@@ -1,6 +1,9 @@
 import identityReducer from '../features/identity/identitySlice';
 import applicationErrorReducer from '../features/applicationError/applicationErrorSlice';
 import localApiDetailsReducer from '../features/localApi/localApiSlice';
+import machineReducer from '../features/machine/machineSlice';
+import partReducer from '../features/part/partSlice';
+import inspectionJobReducer from '../features/inspectionJob/inspectionJobSlice';
 
 import {
     Action,
@@ -23,6 +26,9 @@ const reducers = combineReducers({
     identity: identityReducer,
     applicationError: applicationErrorReducer,
     localApiDetails: localApiDetailsReducer,
+    machineList: machineReducer,
+    partList: partReducer,
+    inspectionJob: inspectionJobReducer,
 });
 const persistConfig = {
     key: 'root',
