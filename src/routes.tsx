@@ -7,15 +7,13 @@ import { useAppSelector } from './app/hooks';
 export function Routes() {
     const identity: IIdentity = useAppSelector(selectIdentity);
 
-    const validLoginRoutes: JSX.Element[] = [
+    const validLoginRoutes = [
         // <Route path={'/route'} key="1" component={component} />,
     ];
 
     return (
         <Switch>
             <Route exact path={'/'} component={Home} />
-            {identity.userName ? validLoginRoutes.map((route) => route) : <></>}
-            {/* check if this is the problem with loading home when not logged in */}
             <Redirect to={'/'} />
         </Switch>
     );

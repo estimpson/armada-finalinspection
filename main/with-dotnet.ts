@@ -29,7 +29,13 @@ const apiDetails = {
     process: null as any,
 };
 
-const initilizeApi = async () => {
+function sleep(ms: number) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+    });
+}
+
+const initializeApi = async () => {
     // Get an avilable port for the dotnet API (production only) or use the development port
     apiDetails.port = isDev ? 5000 : await getPort();
     // Use a signing key to secure the dotnet API
@@ -38,6 +44,8 @@ const initilizeApi = async () => {
     const srcPath = path.join(
         __dirname,
         '..',
+        '..',
+        'armada-packline',
         DOTNET_FOLDER,
         DOTNET_BASENAME + '.csproj',
     );
@@ -51,17 +59,22 @@ const initilizeApi = async () => {
                   DOTNET_BASENAME + '.exe',
               )
             : path.join(__dirname, DOTNET_DIST_FOLDER, DOTNET_BASENAME);
+    console.log(`EXE path: ${apiDetails.exePath}`);
+
     apiDetails.exeArgs = [
         '--urls',
         `https://localhost:${apiDetails.port}`,
         '--signingkey',
         apiDetails.signingKey,
     ];
+    console.log(`EXE args: ${apiDetails.exeArgs}`);
+
     apiDetails.cwd = path.join(
         __dirname.replace('app.asar', 'app.asar.unpacked'),
         '..',
         DOTNET_DIST_FOLDER,
     );
+    console.log(`EXE cwd: ${apiDetails.cwd}`);
 
     if (__dirname.indexOf('app.asar') > 0) {
         if (fs.existsSync(apiDetails.exePath)) {
@@ -114,6 +127,42 @@ const initilizeApi = async () => {
     } else {
         apiDetails.log += `Server running at https://localhost:${apiDetails.port}\r\n`;
         console.log(`Server running at https://localhost:${apiDetails.port}`);
+
+        console.log(`Ping server`);
+        const https = require('https');
+        const httpsAgent = new https.Agent({
+            rejectUnauthorized: false,
+        });
+        const axios = require('axios');
+        const headers = {
+            'x-signing-key': apiDetails.signingKey,
+            'Content-Type': 'application/json',
+        };
+        const client = axios.create({
+            headers: headers,
+            httpsAgent: httpsAgent,
+        });
+        const url = `https://localhost:${apiDetails.port}/home/ping`;
+
+        var i = 20;
+        do {
+            let response = await client
+                .get(url)
+                .then((res: any) => {
+                    console.log(`reached server`);
+                    return 'SUCCESS';
+                    // console.log(res);
+                })
+                .catch((error: any) => {
+                    console.log('failed to reach server');
+                    // console.log(error);
+                    return 'FAILURE';
+                });
+            if (response === 'FAILURE') await sleep(2000);
+            else break;
+            i--;
+        } while (i > 0);
+        if (i === 0) throw new Error('Failure initiating API');
     }
     apiDetails.log += 'leaving initializeApi()';
     console.log('leaving initializeApi()');
@@ -126,7 +175,7 @@ ipcMain.on('get-api-details', (event) => {
         console.log('Get API Details');
         event.sender.send('api-details', JSON.stringify(apiDetails));
     } else {
-        initilizeApi()
+        initializeApi()
             .then(() => {
                 event.sender.send('api-details', JSON.stringify(apiDetails));
             })

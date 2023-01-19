@@ -1,5 +1,3 @@
-import { faUser } from '@fortawesome/free-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Container } from '../../bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -11,6 +9,8 @@ import {
     logout,
     selectIdentity,
 } from '../../features/identity/identitySlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 export function MainMenu(prop: { closeAction?: () => void }) {
     const identity: IIdentity = useAppSelector(selectIdentity);
@@ -26,7 +26,7 @@ export function MainMenu(prop: { closeAction?: () => void }) {
                 variant="dark"
                 expand="sm"
                 sticky="top"
-                className="w-100"
+                className="w-100 draggable"
             >
                 <Container>
                     <Navbar.Brand as={Link} to="/">
@@ -42,13 +42,13 @@ export function MainMenu(prop: { closeAction?: () => void }) {
                     {identity.userName && (
                         <>
                             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                            <Navbar.Collapse id="basic-navbar-nav">
+                            {/* <Navbar.Collapse id="basic-navbar-nav">
                                 <Nav className="me-auto">
-                                    <Nav.Link as={Link} to="/dummy">
-                                        Dummy
+                                    <Nav.Link as={Link} to="/Camera">
+                                        Camera
                                     </Nav.Link>
                                 </Nav>
-                            </Navbar.Collapse>
+                            </Navbar.Collapse> */}
                         </>
                     )}
                 </Container>

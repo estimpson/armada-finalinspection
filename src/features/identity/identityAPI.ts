@@ -1,8 +1,15 @@
+import {
+    ActionCreatorWithPayload,
+    AnyAction,
+    ThunkDispatch,
+} from '@reduxjs/toolkit';
 import axios from 'axios';
-import React from 'react';
+import {
+    ApplicationErrorType,
+    IApplicationErrorState,
+} from '../applicationError/applicationErrorSlice';
 import { ILocalApiState } from '../localApi/localApiSlice';
 import { IIdentity } from './identitySlice';
-import { AxiosErrorHandler } from '../AxiosErrorHandler';
 
 interface IIdentityAPI {
     user: string;
@@ -11,17 +18,14 @@ interface IIdentityAPI {
 
 export function validateLogin(
     localApi: ILocalApiState,
-    user: string,
     password: string,
-    setError?: React.Dispatch<React.SetStateAction<string>>,
+    dispatch: ThunkDispatch<unknown, unknown, AnyAction>,
+    setError?: ActionCreatorWithPayload<IApplicationErrorState, string>,
 ) {
-    // let localApi = store.getState()?.localApiDetails;
-    const queryString = `https://localhost:${localApi.port}/Packline/Login?user=${user}&password=${password}`;
+    const queryString = `https://localhost:${localApi.port}/Home/Login?password=${password}`;
     const headers = {
-        data: {
-            headers: {
-                'x-signing-key': localApi.signingKey,
-            },
+        headers: {
+            'x-signing-key': localApi.signingKey,
         },
     };
 
@@ -45,14 +49,20 @@ export function validateLogin(
                             ? 'A timeout has occurred'
                             : ex.response?.status === 404
                             ? 'Resource not found'
-                            : 'An unexpected error has occurred';
-                    setError && setError(error);
+                            : ex.message;
+                    setError &&
+                        dispatch(
+                            setError({
+                                type: ApplicationErrorType.Unknown,
+                                message: error,
+                            }),
+                        );
                 });
         }
 
         return resolve({
             data: {
-                userCode: user,
+                userCode: 'user',
                 userName: 'Sample User',
             },
         });

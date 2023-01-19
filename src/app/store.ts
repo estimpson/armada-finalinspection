@@ -4,6 +4,9 @@ import localApiDetailsReducer from '../features/localApi/localApiSlice';
 import machineReducer from '../features/machine/machineSlice';
 import partReducer from '../features/part/partSlice';
 import inspectionJobReducer from '../features/inspectionJob/inspectionJobSlice';
+import barcodeScannerReducer from '../features/barcodeScanner/barcodeScannerSlice';
+import packingJobListReducer from '../features/packingJobList/packingJobListSlice';
+import inspectionImageDataReducer from '../features/inspectionImageData/inspectionImageDataSlice';
 
 import {
     Action,
@@ -29,11 +32,21 @@ const reducers = combineReducers({
     machineList: machineReducer,
     partList: partReducer,
     inspectionJob: inspectionJobReducer,
+    scannerData: barcodeScannerReducer,
+    packingJobList: packingJobListReducer,
+    inspectionImageData: inspectionImageDataReducer,
 });
 const persistConfig = {
     key: 'root',
     storage,
-    blacklist: ['applicationError, localApiDetails'],
+    blacklist: [
+        'identity',
+        'applicationError',
+        'localApiDetails',
+        'scannerData',
+        'inspectionImageData',
+        // 'inspectionJob',
+    ],
 };
 const persistedReducer = persistReducer(persistConfig, reducers);
 

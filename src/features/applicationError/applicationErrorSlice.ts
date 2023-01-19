@@ -7,6 +7,7 @@ export enum ApplicationErrorType {
     InvalidPrinterDriver,
     LoginFailed,
     SerialNotFound,
+    InvalidOperation,
     Unknown,
 }
 

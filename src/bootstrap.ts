@@ -7,7 +7,9 @@ import FloatingLabel from 'react-bootstrap/floatinglabel';
 import Form from 'react-bootstrap/form';
 import InputGroup from 'react-bootstrap/inputgroup';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/row';
+import Table from 'react-bootstrap/table';
 
 export {
     Accordion,
@@ -19,5 +21,7 @@ export {
     Form,
     InputGroup,
     Offcanvas,
+    Modal,
     Row,
+    Table,
 };
