@@ -65,6 +65,7 @@ export interface IPackingJob {
     shelfInventoryFlag: boolean;
     jobDoneFlag: boolean;
     rowID: number;
+    packingDT: string;
     part: IPackingPart;
     partPackaging: IPackingPartPackaging;
     objects: IPackingObject[];

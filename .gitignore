@@ -29,3 +29,4 @@ yarn-error.log*
 
 *.suo
 .env
+src/features/_prototype

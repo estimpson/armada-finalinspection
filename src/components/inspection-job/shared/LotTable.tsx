@@ -9,7 +9,7 @@ export function LotTable(props: { lot: IInspectionJob | IPackingJob }) {
                 <thead>
                     <tr>
                         <td className="form-label">Part Number</td>
-                        <td className="form-label">Package Type</td>
+                        <td className="form-label">Date Packed</td>
                         <td className="form-label">Weighed</td>
                         <td className="form-label">Deflashed</td>
                         <td className="form-label">Packing Operator</td>
@@ -21,7 +21,8 @@ export function LotTable(props: { lot: IInspectionJob | IPackingJob }) {
                     <tr>
                         <td className="mb-1">{props.lot.part!.partCode}</td>
                         <td className="mb-1">
-                            {props.lot.partPackaging!.packageCode}
+                            {/* {props.lot.partPackaging!.packageCode} */}
+                            {new Date(props.lot.packingDT).toLocaleString()}
                         </td>
                         <td
                             className={`mb-1${

@@ -136,6 +136,7 @@ export interface IInspectionJob {
     shelfInventoryFlag: boolean;
     jobDoneFlag: boolean;
     rowID: number;
+    packingDT: string;
     part: IInspectionPart;
     partPackaging: IInspectionPartPackaging;
     notes: IInspectionHeaderNote[];

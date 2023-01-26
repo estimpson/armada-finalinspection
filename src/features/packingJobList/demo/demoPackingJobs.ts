@@ -52,6 +52,7 @@ export const DemoPackingJobs: IPackingJob[] = [
         partialBoxQuantity: 111,
         shelfInventoryFlag: false,
         rowID: 229,
+        packingDT: '',
         part: {
             partCode: '10557',
             partDescription: 'BUMPER - 05-1-A-1 : 2',
